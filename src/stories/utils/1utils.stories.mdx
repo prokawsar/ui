@@ -85,13 +85,13 @@ createDate(date);
 
 ## 8. Smart Forms
 
-The `makeForm`, `makeForms` helpers used for tracking form data is dirty or not.
+The `makeForms` factory helper used for tracking form data is dirty or not.
 
 #### Usage
 
 ```js
-import { makeForm, makeForms } from "@kws3/ui/form";
-makeForm(data);
+import { makeForms } from "@kws3/ui/form";
+makeForms({form1_data}, {form2_data});
 ```
 
 ## 9. Resize Observer
@@ -100,11 +100,13 @@ The `resizeObserver` used to handle window resizing.
 
 #### Usage
 
-```js
-import { hasResizeObserver, resizeObserver } from "@kws3/ui/resizeObserver";
-if(hasResizeObserver){
+```html
+{#if hasResizeObserver}
   <div use:resizeObserver on:resize={resizeHandler}>
-}
+{/if}
+<script>
+  import { hasResizeObserver, resizeObserver } from "@kws3/ui/resizeObserver";
+</script>
 ```
 
 ## 10. Search

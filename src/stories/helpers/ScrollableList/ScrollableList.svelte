@@ -12,6 +12,7 @@
         {height}
         {item_height}
         {end_threshold}
+        {padding_threshold}
         bind:start
         bind:end
         on:end={(e) => lastItemsRendered(e)}>
@@ -41,6 +42,7 @@
     height = "600",
     item_height = null,
     end_threshold = 10,
+    padding_threshold = 5,
     style = "";
 
   let klass = "";
@@ -49,6 +51,7 @@
   let records = data.records;
   let loading = false;
   let _items = new Array(100)
+    // @ts-ignore
     .fill()
     .map(() => records[Math.floor(Math.random() * records.length)]);
 

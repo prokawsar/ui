@@ -1,11 +1,12 @@
 <!--
   @component
 
+
   @param {string} [button_class=""] - CSS classes for the Confirm button, Default: `""`
   @param {string} [text=""] - Button text, Default: `""`
-  @param {''|'small'|'medium'|'large'} [size=""] - Size of the Button, Default: `""`
+  @param {SizeOptions} [size=] - Size of the Button, Default: ``
   @param {string} [icon="check"] - Name of the icon that is to be displayed in the button, Default: `"check"`
-  @param {''|'dark' | 'light' | 'warning' | 'info' | 'danger' | 'primary' | 'success'} [color="primary"] - Color of the Button, Default: `"primary"`
+  @param {ColorOptions} [color=primary] - Color of the Button, Default: `primary`
   @param {string} [cy=""] - data-cy attribute for cypress, Default: `""`
   @param {string} [done_icon="check"] - Name of the icon displayed after task is completed successfully, Default: `"check"`
   @param {string} [done_text="Done"] - Button text displayed after task is completed successfully, Default: `"Done"`
@@ -13,8 +14,8 @@
   @param {boolean} [disabled=false] - Disables the button when `true`, Default: `false`
   @param {boolean} [should_confirm=true] - When `false`, skips the confirmation prompt, and makes it a one step process, Default: `true`
   @param {string} [context=""] - Context property, Default: `""`
-  @param {number} [completion_timeout=600] - How long to wait before `done` event is fired, and the UI state reverts back to normal, Default: `600`
-  @param {number} [error_timeout=3000] - How long to wait before `error` event is fired, and the UI state reverts back to normal, Default: `3000`
+  @param {number} [completion_timeout=600] - Specifies the duration to wait after the `done` event, before the UI state returns to normal, Default: `600`
+  @param {number} [error_timeout=3000] - Specifies the duration to wait after the `error` event, before the UI state returns to normal, Default: `3000`
   @param {string} [class=""] - CSS classes for button container, Default: `""`
 
   ### Events
@@ -137,11 +138,11 @@
      */
     context = "",
     /**
-     * How long to wait before `done` event is fired, and the UI state reverts back to normal
+     * Specifies the duration to wait after the `done` event, before the UI state returns to normal
      */
     completion_timeout = 600,
     /**
-     * How long to wait before `error` event is fired, and the UI state reverts back to normal
+     * Specifies the duration to wait after the `error` event, before the UI state returns to normal
      */
     error_timeout = 3000;
 

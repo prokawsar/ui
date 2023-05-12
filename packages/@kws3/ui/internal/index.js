@@ -1,5 +1,7 @@
 export { scrollIntoActiveElement } from "./scrollIntoActiveElement";
 export { fuzzy } from "./fuzzy.js";
+export { default as UndoManager } from "./UndoManager";
+export { DrawingPad, Pen, Eraser } from "./DrawingPad";
 
 /**
  * Detect whether a user has pressed Enter.
@@ -21,8 +23,10 @@ export const IS_MAC =
   typeof window !== "undefined"
     ? "navigator" in window
       ? /mac/i.test(
+          //@ts-ignore
           window.navigator.userAgentData
-            ? window.navigator.userAgentData.platform
+            ? //@ts-ignore
+              window.navigator.userAgentData.platform
             : window.navigator.platform
         )
       : false

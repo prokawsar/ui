@@ -1,19 +1,20 @@
 <!--
   @component
 
+
   @param {string} [button_class=""] - CSS classes for the Delete button, Default: `""`
   @param {string} [text="Delete"] - Button text, Default: `"Delete"`
-  @param {''|'small'|'medium'|'large'} [size=""] - Size of the Button, Default: `""`
+  @param {SizeOptions} [size=] - Size of the Button, Default: ``
   @param {string} [icon="minus-circle"] - Name of the icon that is to be displayed in the button, Default: `"minus-circle"`
-  @param {''|'dark' | 'light' | 'warning' | 'info' | 'danger' | 'primary' | 'success'} [color="danger"] - Color of the Button, Default: `"danger"`
+  @param {ColorOptions} [color=danger] - Color of the Button, Default: `danger`
   @param {string} [cy=""] - data-cy attribute for cypress, Default: `""`
   @param {string} [done_icon="check"] - Name of the icon displayed after task is completed successfully, Default: `"check"`
   @param {string} [done_text="Deleted"] - Button text displayed after task is completed successfully, Default: `"Deleted"`
   @param {object} [context=null] - Context property, Default: `null`
   @param {boolean} [icon_only=false] - Removes text, and text space in the button, Default: `false`
   @param {boolean} [disabled=false] - Disables the button when `true`, Default: `false`
-  @param {number} [completion_timeout=600] - How long to wait before `erased` event is fired, and the UI state reverts back to normal, Default: `600`
-  @param {number} [error_timeout=3000] - How long to wait before `error` event is fired, and the UI state reverts back to normal, Default: `3000`
+  @param {number} [completion_timeout=600] - Specifies the duration to wait after the `erased` event, before the UI state returns to normal, Default: `600`
+  @param {number} [error_timeout=3000] - Specifies the duration to wait after the `error` event, before the UI state returns to normal, Default: `3000`
   @param {string} [class=""] - CSS classes for the button container, Default: `""`
 
   ### Events
@@ -60,6 +61,11 @@
   const fire = createEventDispatcher();
 
   /**
+   * @typedef {import('@kws3/ui/types').ColorOptions} ColorOptions
+   * @typedef {import('@kws3/ui/types').SizeOptions} SizeOptions
+   */
+
+  /**
    * CSS classes for the Delete button
    */
   export let button_class = "",
@@ -69,7 +75,7 @@
     text = "Delete",
     /**
      * Size of the Button
-     * @type {import('@kws3/ui/types').SizeOptions}
+     * @type {SizeOptions}
      */
     size = "",
     /**
@@ -78,7 +84,7 @@
     icon = "minus-circle",
     /**
      * Color of the Button
-     * @type {import('@kws3/ui/types').ColorOptions}
+     * @type {ColorOptions}
      */
     color = "danger",
     /**
@@ -106,11 +112,11 @@
      */
     disabled = false,
     /**
-     * How long to wait before `erased` event is fired, and the UI state reverts back to normal
+     * Specifies the duration to wait after the `erased` event, before the UI state returns to normal
      */
     completion_timeout = 600,
     /**
-     * How long to wait before `error` event is fired, and the UI state reverts back to normal
+     * Specifies the duration to wait after the `error` event, before the UI state returns to normal
      */
     error_timeout = 3000;
 

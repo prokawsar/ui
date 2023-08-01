@@ -2,6 +2,7 @@
   <div class="column">
     <div class="field">
       <KwsPasswordInput
+        {name}
         {size}
         {color}
         {placeholder}
@@ -14,6 +15,8 @@
         {visibility_switch_off_icon}
         {visibility_switch_on_color}
         {visibility_switch_off_color}
+        {required}
+        {autocomplete}
         {disabled} />
     </div>
   </div>
@@ -22,6 +25,7 @@
       <div class="control">
         <KwsPasswordInput
           bind:value={new_pass}
+          {name}
           {size}
           {color}
           {placeholder}
@@ -34,6 +38,8 @@
           {visibility_switch_off_icon}
           {visibility_switch_on_color}
           {visibility_switch_off_color}
+          {required}
+          {autocomplete}
           {disabled} />
         <PasswordValidator password={new_pass} />
       </div>
@@ -61,9 +67,11 @@
      * Color of the input
      * @type {import('@kws3/ui/types').ColorOptions}
      */
-
     color = "",
+    name = "",
     disabled = false,
+    required = false,
+    autocomplete = "on",
     placeholder = "Password",
     show_field_icon = true,
     field_icon = "lock",

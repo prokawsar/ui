@@ -3,6 +3,7 @@
 
 
   @param {array} [items=[]] - Array of items, Default: `[]`
+  @param {object} [iteration_key=null] - Iteration key - by default it uses the index of the array inside the keyed each block, Default: `null`
   @param {string} [height="100%"] - Height of the wrapper, CSS String, Default: `"100%"`
   @param {number | null} [item_height=null] - Height of each list item. If not set, height will be calculated automatically based on each item's offsetHeight, Default: `null`
   @param {number} [start=0] - First item index rendered inside viewport - readonly, Default: `0`
@@ -54,7 +55,9 @@ while more items are loading
     bind:offsetHeight={viewport_height}>
     <div
       bind:this={contents}
-      style="padding-top: {top}px; padding-bottom: {bottom}px;">
+      style="padding-top: {start === 0
+        ? 0
+        : top}px; padding-bottom: {bottom}px;">
       {#each visible as item (item.index)}
         <div class="row">
           <!--Default slot for list view items-->
@@ -87,6 +90,10 @@ while more items are loading
    * Array of items
    */
   export let items = [],
+    /**
+     * Iteration key - by default it uses the index of the array inside the keyed each block
+     */
+    iteration_key = null,
     /**
      * Height of the wrapper, CSS String
      */
@@ -138,9 +145,10 @@ while more items are loading
 
   $: padStart = start > padding_threshold ? start - padding_threshold : start;
   $: padEnd = end + padding_threshold;
-  $: visible = items
-    .slice(padStart, padEnd)
-    .map((data, i) => ({ index: i + padStart, data }));
+  $: visible = items.slice(padStart, padEnd).map((data, i) => ({
+    index: iteration_key ? data[iteration_key] : i + padStart,
+    data,
+  }));
 
   // whenever `items` changes, invalidate the current heightmap
   $: items, viewport_height, item_height, mounted, refresh();
@@ -148,7 +156,7 @@ while more items are loading
 
   async function refresh() {
     if (!mounted) return;
-    const scrollTop = viewport.scrollTop;
+    const { scrollTop } = viewport;
     await tick(); // wait until the DOM is up to date
     let content_height = top - scrollTop;
     let i = start;
@@ -172,7 +180,7 @@ while more items are loading
   }
 
   async function handle_scroll() {
-    const scrollTop = viewport.scrollTop;
+    const { scrollTop } = viewport;
     const old_start = start;
     for (let v = 0; v < rows.length; v += 1) {
       height_map[start + v] = item_height || rows[v].offsetHeight;
@@ -183,7 +191,10 @@ while more items are loading
       const row_height = height_map[i] || average_height;
       if (y + row_height > scrollTop) {
         start = i;
-        top = y - row_height * padding_threshold;
+        top =
+          y > row_height * padding_threshold
+            ? y - row_height * padding_threshold
+            : y;
         break;
       }
       y += row_height;
